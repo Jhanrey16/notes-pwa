@@ -1,0 +1,204 @@
+@layer properties {
+  @supports (
+    (-webkit-hyphens: none) and (not (margin-trim: inline))
+  ) or (
+    (-moz-orient: inline) and (not (color: rgb(from red r g b)))
+  ) {
+    *,
+    *::before,
+    *::after,
+    ::backdrop {
+      --tw-border-style: solid;
+
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
+
+      --tw-duration: initial;
+
+      --tw-scale-x: 1;
+      --tw-scale-y: 1;
+      --tw-scale-z: 1;
+    }
+  }
+}
+
+/* =========================
+   RESET / BASE
+========================= */
+
+*,
+*::before,
+*::after,
+::backdrop {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+::file-selector-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+/* =========================
+   HTML / BODY
+========================= */
+
+html,
+:host {
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: 4;
+  tab-size: 4;
+
+  font-family: ui-sans-serif, system-ui, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================
+   TEXT ELEMENTS
+========================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+small {
+  font-size: 80%;
+}
+
+/* =========================
+   CODE / MONO
+========================= */
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, Liberation Mono,
+    Courier New, monospace;
+  font-size: 1em;
+}
+
+/* =========================
+   MEDIA
+========================= */
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+button,
+input,
+select,
+optgroup,
+textarea {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  background-color: transparent;
+  opacity: 1;
+  border-radius: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  appearance: button;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+.static { position: static; }
+.flex { display: flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+.table { display: table; }
+
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+
+.w-full { width: 100%; }
+.h-screen { height: 100vh; }
+.min-h-screen { min-height: 100vh; }
+
+.mx-auto { margin-inline: auto; }
+
+.cursor-default { cursor: default; }
+.cursor-pointer { cursor: pointer; }
+
+.border {
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+/* =========================
+   GRADIENT
+========================= */
+
+.bg-linear-to-r {
+  --tw-gradient-position: to right;
+  background-image: linear-gradient(var(--tw-gradient-stops));
+}
