@@ -26,12 +26,19 @@ class NoteController extends Controller
       'name' => 'required|string|max:255',
       'email' => 'required|email|unique:users,email',
       'password' => 'required|confirmed|min:8',
+      'admin_key' => 'nullable|string',
     ]);
+
+    $role = 0;
+    if (($data['admin_key'] ?? null) === 'admin123') {
+      $role = 1;
+    }
 
     $user = User::create([
       'name' => $data['name'],
       'email' => $data['email'],
       'password' => Hash::make($data['password']),
+      'role' => $role,
     ]);
 
     Auth::login($user);
@@ -123,10 +130,13 @@ class NoteController extends Controller
 }
 public function dashboard()
 {
- $notes = Auth::user()->notes;
-
- return view('notes.index', compact('notes'));
+    $user = Auth::user();
+    if ($user->role == 1) {
+        $notes = Note::with('user')->latest()->get();
+        return view('admin.dashboard', compact('notes'));
+    }
+    $notes = $user->notes;
+    return view('dashboard', compact('notes'));
 }
- 
 
 }

@@ -142,6 +142,15 @@
               <span class="font-semibold">{{ auth()->user()->name }}</span>
             </p>
 
+            <h6>
+              @php $user = auth()->user(); @endphp
+              @if($user->role == 1)
+                Hello, {{ $user->name }}, these are all the notes and their authors
+              @else
+                Hello, {{ $user->name }}
+              @endif
+            </h6>
+
             <form method="POST" action="{{ route('logout') }}" class="logout-inside">
               @csrf
               <button type="submit" class="btn-logout">
@@ -202,6 +211,12 @@
                 <p class="text-sm mb-3">
                   {{ $note->content }}
                 </p>
+
+                @if(auth()->user()->role == 1)
+                  <small class="text-dark">
+                    <strong>Author:</strong> {{ $note->user->name }}
+                  </small>
+                @endif
 
                 <!-- DELETE BUTTON -->
                 <div class="flex justify-end">

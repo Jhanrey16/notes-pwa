@@ -216,6 +216,13 @@
             class="input-field" placeholder="Confirm your password">
         </div>
       </div>
+      <div class="form-group">
+        <label>Admin Key (optional)</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-key input-icon"></i>
+          <input type="text" name="admin_key" value="{{ old('admin_key') }}" class="input-field" placeholder="Admin key (optional)">
+        </div>
+      </div>
 
       <button type="submit" class="submit-btn">
         Create Account
