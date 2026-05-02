@@ -29,14 +29,54 @@
   }
 
   /* Card */
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    max-width: 430px;
+  }
+
   .form-card {
     background: #3f3f3f;
       border: 1px solid #4b4b4b;
       box-shadow: 0 15px 40px rgba(0,0,0,0.45);
-      border-radius: 14px;
-      max-width: 430px;
+      border-radius: 20px;
       width: 100%;
       padding: 30px;
+  }
+
+  .glass-card {
+    background: rgba(63, 63, 63, 0.96);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+    border-radius: 20px;
+    width: 100%;
+    padding: 24px;
+  }
+
+  #weather {
+    color: #ffffff;
+  }
+
+  #weather h5 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .weather-temp {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .weather-desc {
+    color: #d1d1d1;
+    text-transform: capitalize;
+    font-size: 0.95rem;
   }
 
   /* Icon */
@@ -163,12 +203,24 @@
   <div class="gradient-glow glow-1"></div>
   <div class="gradient-glow glow-2"></div>
 
-  <div class="form-card p-6">
+  <div class="page-wrapper">
+    <div class="glass-card shadow-lg">
+      <div class="card-body text-center" id="weather">
+        @if(isset($weather))
+          <h5>{{ $weather['city'] }}</h5>
+          <div class="weather-temp">{{ $weather['temp'] }}°C</div>
+          <div class="weather-desc">{{ $weather['description'] }}</div>
+        @else
+          <div class="weather-desc">Loading weather...</div>
+        @endif
+      </div>
+    </div>
+
+    <div class="form-card p-6">
     <!-- Icon -->
     <div class="flex justify-center mb-6">
       <div class="icon-circle w-14 h-14 flex items-center justify-center">
         <i class="fa-solid fa-circle-user login-icon"></i>
-
       </div>
     </div>
 
@@ -191,15 +243,15 @@
       <div>
         <label class="text-sm text-gray-200 block mb-2">Email Address</label>
         <div class="input-wrapper">
-        <i class="fa-regular fa-envelope input-icon"></i>
-        <input
-          type="email"
-          name="email"
-          value="{{ old('email') }}"
-          required
-          placeholder="you@example.com"
-          class="input-field w-85% px-4 py-2.5"
-        >
+          <i class="fa-regular fa-envelope input-icon"></i>
+          <input
+            type="email"
+            name="email"
+            value="{{ old('email') }}"
+            required
+            placeholder="you@example.com"
+            class="input-field w-85% px-4 py-2.5"
+          >
         </div>
       </div>
 
@@ -207,8 +259,8 @@
         <label class="text-sm text-gray-200 block mb-2">Password</label>
         <div class="input-wrapper">
           <i class="fa-solid fa-lock input-icon"></i>
-        <input
-          type="password" name="password" required placeholder="Enter your password"class="input-field w-85% px-4 py-2.5">
+          <input
+            type="password" name="password" required placeholder="Enter your password" class="input-field w-85% px-4 py-2.5">
         </div>
       </div>
 
@@ -224,5 +276,29 @@
       </a>
     </p>
   </div>
+
+<script>
+async function loadWeather() {
+    try {
+        const res = await fetch('/weather');
+        const data = await res.json();
+        document.getElementById('weather').innerHTML = `
+            <h5>${data.name}</h5>
+            <div style="font-size:1.8rem;font-weight:bold;">
+                ${data.main.temp}°C
+            </div>
+            <div style="text-transform: capitalize;">
+                ${data.weather[0].description}
+            </div>
+        `;
+    } catch (error) {
+        console.error("Weather load failed", error);
+
+
+    }
+}
+loadWeather();
+setInterval(loadWeather, 60000);
+</script>
 </body>
 </html>

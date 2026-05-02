@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoteController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
-    Route::get('/', [NoteController::class, 'login'])->name('login');
-    Route::get('/auth', [NoteController::class, 'login'])->name('auth');
+    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+    Route::get('/auth', [AuthController::class, 'showLogin'])->name('auth');
 
-    Route::get('/register', [NoteController::class, 'showRegister'])->name('register');
-    Route::post('/register', [NoteController::class, 'register'])->name('register.perform');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.perform');
 
-    Route::post('/login', [NoteController::class, 'authenticate'])->name('login.authenticate');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.authenticate');
 });
 
 
@@ -29,7 +30,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::post('/logout', [NoteController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [NoteController::class, 'index'])->name('notes.index');
     Route::get('/dashboard/{note}', [NoteController::class, 'show'])->name('notes.showNote');
