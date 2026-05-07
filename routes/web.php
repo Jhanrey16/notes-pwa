@@ -33,8 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [NoteController::class, 'dashboard'])
-    ->name('notes.index');
-    Route::get('/dashboard/{note}', [NoteController::class, 'show'])->name('notes.showNote');
+        ->name('notes.index');
+
+    Route::get('/dashboard/{note}', [NoteController::class, 'show'])
+        ->name('notes.showNote');
 
     Route::post('/notes', [NoteController::class, 'store']);
     Route::put('/notes/{note}', [NoteController::class, 'update']);

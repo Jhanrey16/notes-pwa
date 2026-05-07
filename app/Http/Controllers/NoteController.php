@@ -73,6 +73,6 @@ class NoteController extends Controller
             return view('admin.dashboard', compact('notes'));
         }
         $notes = $user->notes;
-        return view('dashboard', compact('notes'));
+        return view('notes.index', compact('notes'));
     }
 }
