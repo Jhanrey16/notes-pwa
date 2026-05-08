@@ -48,9 +48,7 @@ class NoteController extends Controller
 
     public function destroy(Note $note)
     {
-        if ($note->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized');
-        }
+      
 
         $note->delete();
         return back();
